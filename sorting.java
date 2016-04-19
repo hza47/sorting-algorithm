@@ -19,14 +19,13 @@ public class sorting {
 				i++;
 			while(input[j]>pivot){
 				j--;
-			}
-			
+			}		
 			if(i<=j){
-					int temp = input[i];
-					input[i] = input[j];
-					input[j]=temp;
-					i++;
-					j--;
+				int temp = input[i];
+				input[i] = input[j];
+				input[j]=temp;
+				i++;
+				j--;
 			}			
 		}
 		quickSort(input, left, j);
@@ -105,14 +104,67 @@ public class sorting {
 		}
 		
 	}
+	public static int magic(int[] arr){
+		return magic(arr, 0, arr.length);
+	}
+	public static int magic(int[] arr, int left, int right){
+		int middle = (left+right)/2;
+		int result =-1;
+		if(left>=right){
+			return -1;
+		}
+		if(arr[middle]==middle){
+			return middle;
+		}
+		if(arr[middle]<middle)
+			result= magic(arr, middle+1, right);
+		else{
+			result= magic(arr, left, middle);
+		}
+		return result;
+		
+	}
+	
+	public static int magic2(int[] arr, int left, int right){
+		int middle = (left+right)/2;
+		if(left>=right){
+			return -1;
+		}
+		if(arr[middle]==middle){
+			return middle;
+		}
+		if(arr[middle]>middle){
+		//	System.out.println("middle is : "+ middle);
+		//	System.out.println("left is : "+ left);
+			int result1 =magic2(arr, left, middle);
+			if(result1>=0){
+				return result1;
+			}
+			int result2 = magic2(arr, arr[middle], right);
+			return result2;
+		}
+		else{
+			int result1 =magic2(arr, middle+1, right);
+			if(result1>=0){
+				return result1;
+			}
+			int result2 = magic2(arr, left, arr[middle]);
+			return result2;
+		}
+	}
 	public static void main(String[] args){
 		int [] test = {4,5,2,7,3,0};
-		//quickSort(test, 0, test.length-1);
-		mergeSort(test);
-		for (int i = 0; i < test.length; i++)
-            System.out.print(test[i]+" ");    
+		int [] tes2=  {-5,0,2,10,15};
+		int[] test3 = {-10,-5,1,2,2,3,4,7,9,12,13};
+		//quickSort(test, 0, test.le  ngth-1);
+	//	mergeSort(test);
+//		for (int i = 0; i < test.length; i++)
+//            System.out.print(test[i]+" ");  
+//		System.out.println("fjdjf");
+		System.out.println(magic2(test3, 0, test3.length));
 		
 		
 	}
+	
 
 }
